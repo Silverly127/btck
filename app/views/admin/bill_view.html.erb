@@ -1,0 +1,63 @@
+<% content_for :content do %>
+	<h3>Các sản phẩm được đặt hàng</h3>
+	<% total=0 %>
+	<% d=1 %>
+	<table class="table border border-danger text-danger bg-light">
+		<thead>
+			<tr>
+				<th scope="col">STT</th>
+				<th scope="col">Tên sản phẩm</th>
+				<th scope="col">Giá bán</th>
+				<th scope="col">Số lượng</th>
+				<th scope="col">Tổng cộng</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @billdts.each do |billdt| %>
+			<tr>
+				<th scope="row"><%= d %></th>
+				<td><%= billdt.nameSP %></td>
+				<td><%= number_to_currency(billdt.priceHD,unit: "",delimiter: ".",precision: 0)%>đ</td>
+				<td><%= billdt.quantityHD %></td>
+				<td><%= number_to_currency(billdt.priceHD*billdt.quantityHD,unit: "",delimiter: ".",precision: 0)%>đ</td>
+			</tr>
+			<% total+=billdt.priceHD*billdt.quantityHD%>
+			<% d+=1 %>
+			<% end %>
+			<tr>
+				<th></th>
+				<td></td>
+				<td></td>
+				<td scope="row">Tổng cộng: <%= number_to_currency(total,unit: "",delimiter: ".",precision: 0)%>đ </td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="bg-light">
+		<h3>Thông tin người mua hàng</h3>
+
+		<p>Tên khách hàng: <%= @user.usernameUS %></p>
+
+		<p>Email:  <%= @user.email %> </p>
+
+		<p>Địa chỉ giao hàng:  <%= @bill.address %> </p>
+
+		<p>Tình trạng đơn hàng:
+			<% if(@bill.check==0) %>
+			Chưa duyệt
+			<% else %>
+			Đã duyệt vào lúc: <%= @bill.datecheck %>
+			<% end %>
+		</p><br>
+
+	</div>
+	<% if(@bill.check==0) %>
+	<div class="d-flex justify-content-center">
+		<form action="bill_check" method="post">
+			<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+			<input type="hidden" name="id" value="<%= @bill.id %>">
+			<button class="btn btn-success" type="submit" style="margin: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;Duyệt&nbsp;&nbsp;&nbsp;&nbsp;</button>
+		</form>
+	</div>
+	<% end %>
+<% end %>

@@ -1,0 +1,67 @@
+<% content_for :content do %>
+<script type="text/javascript">
+	function updateCart(slSP,id) {
+		$.get('cart_update',{slSP:slSP,id:id},function() {
+			location.reload();
+		});
+	}
+</script>
+<br>
+<div class="container" style="min-height: 500px">
+<% if(@carts.count==0) %>
+	<div style="height: 470px">
+		<p class="text-dark">Không có sản phẩm để hiển thị! </p>
+	</div>
+<% else %>
+	<form action="/bill" method="post" style="overflow-x: auto;">
+		<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+		<table class="table border border-danger text-danger">
+			<thead>
+				<tr>
+					<th scope="col">Giỏ hàng</th>
+					<th scope="col">Tên</th>
+					<th scope="col">Số lượng</th>
+					<th scope="col">Giá</th>
+					<th scope="col">Giảm giá</th>
+					<th scope="col">Thành tiền</th>
+					<th scope="col">Xóa</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% total=0 %>
+				<% d=1 %>
+				<% @carts.each do |item| %>
+				<tr>
+					<th scope="row"><%= d %></th>
+					<td><%= item.tenSP %></td>
+					<td>
+						<input type="number" name="" value="<%= item.slSP %>" onchange="updateCart(this.value,'<%= item.id %>')" min = "1" max="<%= item.tonkho %>" >
+						<br>Tối đa: <%= item.tonkho %>
+					</td>
+					<td><%= number_to_currency(item.giaSP,unit: "",delimiter: ".",precision: 0)%>đ</td>
+					<td><%= item.giamSP %> %</td>
+					<td><%= number_to_currency((item.giaSP-item.giaSP/100*item.giamSP)*item.slSP,unit: "",delimiter: ".",precision: 0)%>đ</td>
+					<% total+= (item.giaSP-item.giaSP/100*item.giamSP)*item.slSP%>
+					<% d+=1 %>
+					<td><a href="/cart_delete/<%=item.id%>" class="text-danger"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+				</tr>
+				<% end %>
+				<tr>
+					<th scope="row"></th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td scope="row">Tổng cộng:</td>
+					<td><%= number_to_currency(total,unit: "",delimiter: ".",precision: 0)%>đ</td>
+					<td><input class="btn btn-sm btn-danger" type="submit" value="Thanh toán">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<hr>
+		<h4 class="text-danger">Địa chỉ giao hàng</h4>
+		<input class="border border-danger" type="text" name="address" size="100%" required>
+	</form><br>
+	<% end %>
+</div>
+<% end %>

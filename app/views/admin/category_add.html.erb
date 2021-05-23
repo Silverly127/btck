@@ -1,0 +1,18 @@
+<% content_for :content do %>
+	<div class="container">
+		<hr class="border-danger">
+		<h2>Thêm danh mục sản phẩm</h2><br>
+		<form action="category_add_xl" method="post">
+			<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+			<div class="form-group">
+				<label>Tên danh mục:</label>
+				<input type="text" class="form-control" name="dm[nameDM]" value="" style="width: 50%">
+			</div>
+			<div class="form-group">
+				<label>Slug danh mục :</label>
+				<input type="text" class="form-control" name="dm[slug]" value="" style="width: 50%">
+			</div>
+			<button type="submit" class="btn btn-danger">Thêm danh mục</button>
+		</form>
+	</div>
+<% end %>

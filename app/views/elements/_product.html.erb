@@ -1,0 +1,34 @@
+<%= stylesheet_link_tag 'product', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="col-md-3 col-6">
+	<a href="/product/<%= product.id %>">
+		<div class="card shadow">
+			<div class="inner">
+				<% if(product.quantitySP<=0) %>
+				<span class="sold-out-overlay bg-warning">Đã hết hàng</span>
+				<% end %>
+				<img class="card-img-top" src="<%= product.imgSP  %>" width="100%" height=250px>
+			</div>
+			<div class="card-body text-center">
+				<h6 class="card-title"><%= product.nameSP  %></h6>
+				<p class="card-text"><%= number_to_currency(product.priceSP-product.priceSP/100*product.discount,unit: "",delimiter: ".",precision: 0)%>đ
+					<% if(product.discount!=0) %>
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i><s><%= number_to_currency(product.priceSP,unit: "",delimiter: ".",precision: 0)%>đ</s>
+					<span class="badge badge-danger" id="saleoff"><%= product.discount %>%</span>
+					<% end %>
+				</p>
+			</a>
+			<form action="/cart_add" method="post">
+				<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+				<input type="hidden" name="idSP" value="<%= product.id %>">
+				<input type='hidden' name='slSP' value="1">
+				<input type="hidden" name="tenSP" value="<%= product.nameSP %>">
+				<input type='hidden' name='tonkho' value="<%= product.quantitySP %>">
+				<input type="hidden" name="giaSP" value="<%= product.priceSP %>">
+				<input type='hidden' name='giamSP' value="<%= product.discount %>">
+				<% if(product.quantitySP>0) %>
+				<button class="btn btn-sm btn-outline-danger btncart" type="submit">Thêm vào giỏ</button>
+				<% end %>
+			</form>
+		</div>
+	</div>
+</div>

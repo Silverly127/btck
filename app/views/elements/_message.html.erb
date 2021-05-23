@@ -1,0 +1,4 @@
+<% if(session['status']!=nil) %>
+<script language='javascript'>alert('<%= session['status'] %>');</script>
+<% session['status'] = nil %>
+<% end %>

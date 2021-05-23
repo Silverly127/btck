@@ -1,0 +1,36 @@
+<% content_for :content do %>
+	<%= stylesheet_link_tag 'register', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<br>
+	<div class="container bg-light shadow" id="registercont">
+		<br><br>
+		<div class="text-center">
+			<h2>ĐĂNG KÝ</h2>
+		</div>
+		<hr class="border-danger">
+		<form action="/register" method="post">
+			<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+			<div class="form-group">
+				<input type="text" class="form-control form-control-sm" placeholder="Tên tài khoản" name="user[usernameUS]" maxlength="14">
+			</div><br>
+			<div class="form-group">
+				<input type="Email" class="form-control form-control-sm" placeholder="Địa chỉ Email" name="user[email]">
+			</div><br>
+			<div class="form-group">
+				<input type="password" class="form-control form-control-sm" placeholder="Mật khẩu" name="user[passwordUS]" maxlength="14">
+			</div><br>
+			<div class="form-group">
+				<input type="password" class="form-control form-control-sm" placeholder="Nhập lại mật khẩu" name="user[passwordUS2]" maxlength="14">
+			</div>
+			<br>
+			<div class="d-flex justify-content-center">
+				<button type="submit" class="btn btn-danger btn-md btn-block">Đăng ký</button>
+			</div>
+		</form>
+		<br>
+
+		</div>
+		<br>
+	</body>
+	</html>
+
+<% end %>

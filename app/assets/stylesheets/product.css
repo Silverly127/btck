@@ -1,0 +1,82 @@
+a{
+	color: black;
+}
+a:hover{
+	text-decoration: none;
+	color: firebrick;
+}
+@media(max-width: 768px)
+{
+s
+	{
+		display: none;
+	}
+.col-6
+	{
+		padding: 5px;
+	}
+#saleoff
+	{
+		display: none;
+	}
+.inner img
+	{
+	height: 100px;
+	}
+}
+button
+{
+	margin-top: 5px;
+}
+.col-6
+{
+	margin-bottom: 15px;
+}
+.inner
+{
+	overflow: hidden;
+}
+.inner img
+{
+	transition: all 1.5s ease;
+}
+.card:hover img
+{
+	transform: scale(1.5);
+}
+.card-body
+{
+	height: 135px;
+	overflow: hidden;
+}
+.card-body .card-title
+{
+	height: 40px;
+	overflow: hidden;
+}
+.card-body .card-text
+{
+	height: 20px;
+}
+.card-body a
+{
+	margin-top: 8px;
+	height: 30px;
+}
+.sold-out-overlay {
+font-size: 14px;
+font-weight: 600;
+padding: 5px 10px;
+position: absolute;
+right: 10px;
+top: 10px;
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+<% content_for :content do %>
+<br>
+<div class="container" style="min-height: 500px;">
+	<table class="table border border-danger text-danger bg-light">
+	<thead>
+		<tr>
+			<th scope="col">Ngày tạo</th>
+			<th scope="col">Đơn hàng</th>
+			<th scope="col">Trạng thái</th>
+			<th scope="col">Hành động</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @bills.each do |bill| %>
+		<tr>
+			<th scope="row"><%= bill.created_at %></th>
+			<td><%= bill.id %></td>
+			<td>
+				<% if(bill.check==0) %>
+				Chưa xử lý
+				<% else %>
+				Đã xử lý
+				<% end %>
+			</td>
+			<td><form action="/bill_history_view">
+				<input type="hidden" name="id" value="<%= bill.id %>">
+				<button class="btn btn-sm btn-info" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;
+				Xem chi tiết&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+			</form></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+</div><br><br>
+<% end %>

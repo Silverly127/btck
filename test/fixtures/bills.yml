@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  check: 1
+  datecheck: 2021-05-17 13:45:24
+  address: 2021-05-17 13:45:24
+
+two:
+  check: 1
+  datecheck: 2021-05-17 13:45:24
+  address: 2021-05-17 13:45:24

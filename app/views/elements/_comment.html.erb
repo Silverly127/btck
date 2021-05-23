@@ -1,0 +1,64 @@
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item bg-light">
+    <a class="nav-link active" id="windows-tab" data-toggle="tab" href="#windows" role="tab" aria-controls="windows" aria-selected="true">Bình luận về sản phẩm</a>
+  </li>
+  <li class="nav-item bg-light">
+    <a class="nav-link" id="macosx-tab" data-toggle="tab" href="#macosx" role="tab" aria-controls="macosx" aria-selected="false">Thêm bình luận</a>
+  </li>
+</ul>
+<div class="tab-content bg-light" id="myTabContent" style="min-height: 300px">
+  <div class="tab-pane fade show active" id="windows" role="tabpanel" aria-labelledby="windows-tab">
+    <br>
+    <% if(@comments.count!=0) %>
+    <% @comments.zip(@users).each do |comment,user| %>
+    <div class="row">
+      <div class="col-md-2 col-2">
+        <img src="<%= user.imgUS %>" width="80%" style="margin-left: 20px">
+      </div>
+      <div class="col-md-10 col-10">
+        <ul style="list-style-type: none;">
+          <li><b><%= user.usernameUS %></b></li>
+          <li class="secondary-text"><%= comment.created_at %></li>
+          <br>
+          <li><%= comment.description %></li>
+        </ul>
+      </div>
+    </div><br>
+    <% end %>
+    <% else %>
+    <div class="container">
+      <h5>Không có bình luận về sản phẩm này.</h5>
+    </div>
+    <% end %>
+  </div>
+  <div class="tab-pane fade" id="macosx" role="tabpanel" aria-labelledby="macosx-tab">
+    <br>
+    <div class="row">
+      <% if(session['user_id']) %>
+        <div class="col">
+        <h4>&nbsp;&nbsp;&nbsp;Bình luận của bạn:</h4>
+        <div class="container">
+          <form action="/comment_add" method="post">
+          <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+          <input type="hidden" name="product_id" value="<%= @product.id %>">
+          <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
+          <textarea style="resize: none;width: 100%" rows="5" id="mycomment" name="description" maxlength="200"></textarea>
+
+        </div><br>
+        <button class="btn btn-danger float-right">Gửi bình luận</button><br><br>
+        </form>
+    </div>
+      
+
+      <% else %>
+    <div class="col">
+      <div class="container">
+        <h4>Bạn cần đăng nhập để có thể bình luận!</h4>
+      </div>
+    </div>
+      <% end %>
+  </div>
+</div>
+</div><br><br>
+

@@ -1,0 +1,39 @@
+<% content_for :content do %>
+	<table class="table border border-danger bg-light" >
+		<thead>
+			<tr>
+				<th scope="col">Tên danh mục</th>
+				<th scope="col">Ngày tạo danh mục</th>
+				<th scope="col">Lần cuối cập nhật</th>
+				<th scope="col">Slug danh mục</th>
+				<th scope="col">Cập nhật danh mục</th>
+				<th scope="col">Xóa danh mục</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @categories.each do |category| %>
+			<tr >
+					<form action="category_update" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+				<th scope="row"><input type="text" class="form-control" name="nameDM" value="<%= category.nameDM %>"></th>
+				<td><%= category.created_at %></td>
+				<td><%= category.updated_at %></td>
+				<td class=" text-center">
+				<input type="text" class="form-control" name="slug" value="<%= category.slug %>">
+				</td>
+				<td>
+						<input type="hidden" name="id" value="<%= category.id %>">
+						<button class="btn btn-sm btn-success" type="submit">&nbsp;&nbsp;Cập nhật&nbsp;</button>
+					</form>
+				</td>
+				<td>
+					<form action="category_delete">
+					<input type="hidden" name="id" value="<%= category.id %>">
+					<button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Xóa danh mục này?');">&nbsp;&nbsp;&nbsp;&nbsp;
+					Xoá&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				</form></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>

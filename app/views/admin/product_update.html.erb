@@ -1,0 +1,54 @@
+
+<% content_for :content do %>
+<link rel="stylesheet" type="text/css" href="assets/view_product.css">
+<form action="product_update_xl" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+	<div class="container">
+		<hr>
+		<h2>Sửa tên sản phẩm</h2>
+		<h1 ><font color="firebrick" class="gamename"><input type="text" name="nameSP" value="<%= @product.nameSP %>"></font></h1>
+	</div>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-12">
+				<img width="50%" src="<%= @product.imgSP %>">
+				<hr>
+				<h3>Sửa link ảnh sản phẩm</h3><br>
+				<input type="text" size="100" name="imgSP" value="<%= @product.imgSP %>"></font>
+			</div> 
+
+				<div class="text-left">
+					<h5>Sửa giá sản phẩm</h5>
+					<input type="text" name="quantitySP" value="<%= @product.quantitySP %>"> Số lượng
+					<br><br>
+					<input type="text" name="discount" value="<%= @product.discount %>"> % Giảm giá
+					<br><br>
+					<h3 class="money"><input type="text" name="priceSP" value="<%= @product.priceSP %>"> Giá sản phẩm</h3>
+
+				</div>
+				<hr>
+				<hr>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<hr>
+		<h2>Sửa danh mục</h2>
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<% @categories.each do |category| %>
+				<input type="radio" name="category_id" value="<%= category.id %>" <% if(@product.category_id==category.id) %> checked="on" <% end %> >
+				<%= category.nameDM %><br><br>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="container d-flex justify-content-center">
+		<input type="hidden" name="id" value="<%= @product.id %>">
+		<button type="submit" class="btn btn-danger">Sửa</button>
+	</div>
+	<br><br>
+	</form>
+<% end %>

@@ -1,0 +1,11 @@
+#registercont
+{
+	width: 500px;
+}
+@media(max-width: 768px)
+{
+.registercont
+	{
+		width: 370px;
+	}
+}

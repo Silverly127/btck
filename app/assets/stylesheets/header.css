@@ -1,0 +1,19 @@
+.navbar
+{
+	opacity: 0.9;
+}
+.navbar:hover
+{
+	opacity: 1;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+ }
+.modal-backdrop 
+{
+  position:unset !important;
+}
+
+
+
+

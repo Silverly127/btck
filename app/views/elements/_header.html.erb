@@ -1,0 +1,46 @@
+<%= stylesheet_link_tag 'header', media: 'all', 'data-turbolinks-track': 'reload' %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
+	<div class="container">
+		<a class="navbar-brand" href="/"><img src="/assets/KLST.png" width="100" height="30"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Danh mục
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<% categories.each do |category| %>
+						<a class="dropdown-item" href="/category/<%= category.slug %>"><%= category.nameDM %></a>
+						<% end %>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Sắp xếp sản phẩm
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="/arrange/highlow">Giá cao đến thấp</a>
+						<a class="dropdown-item" href="/arrange/lowhigh">Giá thấp đến cao</a>
+						<a class="dropdown-item" href="/arrange/az">A -> Z</a>
+						<a class="dropdown-item" href="/arrange/za">Z -> A</a>
+					</div>
+				</li>
+				<% if(session[:user_id]) %>
+				<%= render "elements/logout" %>
+				<% else %>
+				<%= render "elements/login" %>
+				<% end %>
+				<li class="nav-item">
+					<a class="nav-link" href="/cart" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng</a>
+				</li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" action="/search">
+				<input class="form-control mr-sm-2" type="search" aria-label="Search" name="vls" autofocus="on">
+				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Tìm kiếm</button>
+			</form>  
+		</div>
+	</div>
+</nav>

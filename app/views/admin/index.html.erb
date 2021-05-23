@@ -1,0 +1,55 @@
+<% content_for :content do %>
+<div class="market-updates">
+		<div class="col-md-3 market-update-gd">
+			<div class="market-update-block clr-block-2">
+				<div class="col-md-4 market-update-right">
+					<i class="fa fa-eye"> </i>
+				</div>
+				<div class="col-md-8 market-update-left">
+					<h4>Sản phẩm</h4>
+					<h3><%= @products.count %></h3>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<div class="col-md-3 market-update-gd">
+			<div class="market-update-block clr-block-1">
+				<div class="col-md-4 market-update-right">
+					<i class="fa fa-users" ></i>
+				</div>
+				<div class="col-md-8 market-update-left">
+					<h4>Khách hàng</h4>
+					<h3><%= @users.count %></h3>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<div class="col-md-3 market-update-gd">
+			<div class="market-update-block clr-block-3">
+				<div class="col-md-2 market-update-right">
+					<i class="fa fa-usd"></i>
+				</div>
+				<div class="col-md-10 market-update-left" style="word-break: break-all">
+					<h4>Doanh thu</h4>
+					<h3><%= number_to_currency(@dt,unit: "",delimiter: ".",precision: 0)%>đ</h3>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<div class="col-md-3 market-update-gd">
+			<div class="market-update-block clr-block-4">
+				<div class="col-md-4 market-update-right">
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+				</div>
+				<div class="col-md-8 market-update-left">
+					<h4>Đơn hàng</h4>
+					<h3><%= @bills.count %></h3>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<div class="clearfix"> </div>
+</div>
+<hr class="border border-danger">
+
+<% end %>

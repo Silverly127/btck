@@ -1,0 +1,29 @@
+<% content_for :content do %>
+	<%= stylesheet_link_tag 'register', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<br>
+	<div class="container bg-light shadow" id="registercont">
+		<br><br>
+		<div class="text-center">
+			<h2>ĐĂNG NHẬP ADMIN</h2>
+		</div>
+		<hr class="border-danger">
+		<form action="/adminlogin" method="post">
+			<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+			<div class="form-group">
+				<input type="text" class="form-control form-control-sm" placeholder="Tên tài khoản" name="admin[usernameAD]" maxlength="14">
+			</div><br>
+			<div class="form-group">
+				<input type="password" class="form-control form-control-sm" placeholder="Mật khẩu" name="admin[passwordAD]" maxlength="14">
+			</div><br>
+			<div class="d-flex justify-content-center">
+				<button type="submit" class="btn btn-danger btn-md btn-block">Đăng nhập</button>
+			</div>
+		</form>
+		<br>
+
+		</div>
+		<br><br><br><br><br><br><br>
+	</body>
+	</html>
+
+<% end %>

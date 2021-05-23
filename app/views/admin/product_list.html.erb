@@ -1,0 +1,29 @@
+<% content_for :content do %>
+	<div class="row">
+		<% @products.each do |product| %>
+		<div class="col-lg-6 col-sm-12">
+			<img src="<%= product.imgSP %>" width="20%" class="float-left">
+			<div class="dropdown float-right">
+				<form action="product_update">
+					<input type="hidden" name="id" value="<%= product.id %>">
+					<button class="btn btn-sm btn-success" type="submit">Chỉnh sửa</button>
+				</form><br>
+				<form action="product_delete">
+					<input type="hidden" name="id" value="<%= product.id %>">
+					<button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Chắc chắn xóa sản phẩm này?');">&nbsp;&nbsp;&nbsp;&nbsp;
+					Xoá&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				</form>
+			</div>
+			<div style="margin-left: 120px;word-wrap: break-word;" id="contentsp">
+				<h4><%= product.nameSP %></h4>
+				<p><%= number_to_currency(product.priceSP-product.priceSP/100*product.discount,unit: "",delimiter: ".",precision: 0)%>đ</p>
+				<% if(product.discount!=0) %>
+				<i class="fa fa-shopping-cart" aria-hidden="true"></i><s><%= number_to_currency(product.priceSP,unit: "",delimiter: ".",precision: 0)%>đ</s>
+				<span class="badge badge-danger" id="saleoff">-<%= product.discount %>%</span>
+				<% end %>
+			</div>
+			<div class="clearfix"></div><br><br>
+		</div>
+		<% end %>
+	</div>
+<% end %>

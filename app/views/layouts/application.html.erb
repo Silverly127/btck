@@ -1,0 +1,83 @@
+<% if(session['admin_id']) %>
+<!DOCTYPE html>
+<head>
+	<title>Admin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<link rel="stylesheet" type="text/css" href="assets/admin.css">
+	<link rel="stylesheet" type="text/css" href="assets/adminres.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="assets/morris.css">
+	<link rel="stylesheet" type="text/css" href="assets/monthly.css">
+	<script type="text/javascript" src="assets/jque.min.js"></script>
+	<script type="text/javascript" src="assets/raphael.js"></script>
+	<script type="text/javascript" src="assets/morris.js"></script>
+</head>
+<body>
+	<section id="container">
+		<header class="header fixed-top clearfix bg-dark">
+			<div class="brand bg-danger">
+				<a class="logo">
+					<img src="assets/KLST.png" width="150" height="50">
+				</a>
+				<div class="sidebar-toggle-box">
+					<div class="fa fa-bars"></div>
+				</div>
+			</div>
+
+			<div class="top-nav clearfix">
+				<ul class="nav pull-right top-menu">
+					<li class="dropdown">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							&nbsp;
+							<span class="username">
+								<%= session[:admin_name] %>
+							</span>
+							<b class="caret"></b>
+						</a>
+						<link rel="stylesheet" type="text/css" href="assets/bootstrap.min.css">
+						<ul class="dropdown-menu extended logout">
+							<li><a href="/info_admin"><i class=" fa fa-suitcase"></i>Thông tin cá nhân</a></li>
+							<li><a href="/logout"><i class="fa fa-key"></i> Đăng xuất </a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<%= render "ad_elements/ad_header" %>
+		<section id="main-content">
+			<section class="wrapper" style="min-height: 520px">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+			<%= yield :content %>
+		</section>
+		<%= render "ad_elements/ad_footer" %>
+	</section>
+</section>
+	<script type="text/javascript" src="assets/bootstrap.js"></script>
+	<script src="assets/jquery.dcjqaccordion.2.7.js"></script>
+	<script src="assets/scripts.js"></script>
+	<script src="assets/jquery.slimscroll.js"></script>
+	<script src="assets/jquery.nicescroll.js"></script>
+</body>
+</html>
+<% else %>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <title>Trang chủ KiS Game Shop</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
+</head>
+<body>
+<%= render "elements/header", :categories => @categories  %>
+<%= yield :content %>
+<%= render "elements/footer" %>
+</body>
+</html>
+<% end %>
+<%= render "elements/message" %>

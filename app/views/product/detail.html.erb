@@ -1,0 +1,71 @@
+<% content_for :content do %>
+<%= stylesheet_link_tag 'view_product', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="container">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb" style="background: none">
+			<li class="breadcrumb-item"><a href="/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+			<li class="breadcrumb-item active" aria-current="page"><font color="firebrick"></font></li>
+		</ol>
+	</nav>
+</div>
+<div class="container">
+	<h1 ><font color="firebrick" class="gamename"><%= @product.nameSP %></font></h1>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-12">
+			<img width="70%" src="<%= @product.imgSP %>">
+		</div> 
+		<div class="col-md-6 col-12">
+			<div class="card shadow">
+				<div class="card-body">
+					<h6>TÊN SẢN PHẨM: <%= @product.nameSP %><br><br>THUỘC DÒNG SẢN PHẨM: <%= @productDM.nameDM %></h6>
+					<div class="text-bottom"><i class="fa fa-tags" aria-hidden="true"></i>Tag:
+						<a href="/category/<%= @productDM.slug %>">
+							<%= @productDM.nameDM %>
+						</a>
+					</div>
+				</div>
+			</div><br>
+
+			<div class="text-left">
+				<h5>GIÁ SẢN PHẨM</h5>
+				<% if(@product.discount!=0) %>
+				<h6>
+					<s><%= number_to_currency(@product.priceSP,unit: "",delimiter: ".",precision: 0)%>đ</s>
+					<span class='badge badge-danger' id='saleoff'>-<%= @product.discount %> %</span>
+				</h6>
+				<% end %>
+
+				<h6><br></h6>
+				<h3 class="money"><%= number_to_currency(@product.priceSP-@product.priceSP/100*@product.discount,unit: "",delimiter: ".",precision: 0)%>đ</h3>
+			</div>
+			<hr>
+			<div class="d-flex justify-content-center">
+				<% if(@product.quantitySP<=0) %>
+ 				<label>Sản phẩm đã hết hàng</label>
+				<% else %>
+				<form action="/cart_add" method="post">
+					<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+					<input type="hidden" name="idSP" value="<%= @product.id %>">
+					<input type='number' name='slSP' value="1" max="<%= @product.quantitySP %>">
+					<input type="hidden" name="tenSP" value="<%= @product.nameSP %>">
+					<input type='hidden' name='tonkho' value="<%= @product.quantitySP %>">
+					<input type="hidden" name="giaSP" value="<%= @product.priceSP %>">
+					<input type='hidden' name='giamSP' value="<%= @product.discount %>">
+					<button type="submit" class="btn btn-warning btncart">Thêm vào giỏ</button>
+				</form>
+				<% end %>
+			</div>
+			<hr>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<hr>
+	<%= render "elements/comment" %>
+</div>
+
+<% end %>

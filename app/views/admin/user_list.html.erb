@@ -1,0 +1,31 @@
+<% content_for :content do %>
+<% if(@users.count==0) %>
+<h4>Không có người dùng</h4>
+<% else %>
+<table class="table border border-danger text-danger bg-light">
+	<thead>
+		<tr>
+			<th scope="col">Tên khách hàng</th>
+			<th scope="col">Ngày tạo tài khoản</th>
+			<th scope="col">Email</th>
+			<th scope="col">Các đơn hàng đã đặt</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+		<tr>
+			<th scope="row"><%= user.usernameUS %></th>
+			<td><%= user.created_at %></td>
+			<td><%= user.email %></td>
+			<td>
+				<form action="/user_view">
+					<input type="hidden" name="id" value="<%= user.id %>">
+					<button class="btn btn-sm btn-success" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;Xem&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				</form>
+			</td>		
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<% end %>
+<% end %>	

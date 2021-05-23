@@ -1,0 +1,9 @@
+<div class="container">
+	<hr class="border-danger">
+	<h4 class="text-danger">SẢN PHẨM MỚI NHẤT</h4><br>
+	<div class="row ">
+		<% @products.each do |product| %>
+		<%= render "elements/product", :product => product  =%>
+		<% end %>
+</div>
+</div><br>

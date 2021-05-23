@@ -1,0 +1,17 @@
+<% content_for :content do %>
+<div class="container">
+	<hr class="border-danger">
+	<h4 class="text-danger">TÌM KIẾM CHO TỪ KHÓA: <%= @vls %></h4><br>
+	<% if(@searchproducts.count==0) %>
+	<div style="height: 450px">
+		Không có sản phẩm để hiển thị!
+	</div>
+	<% else %>
+	<div class="row ">
+		<% @searchproducts.each do |product| %>
+		<%= render "elements/product", :product => product  =%>
+		<% end %>
+	</div>
+	<% end %>
+</div>
+<% end %>

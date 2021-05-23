@@ -1,0 +1,69 @@
+<% content_for :content do %>
+<br><br>
+	
+	<div class="container" style="min-height: 250px">
+		<h4>Các sản phẩm được đặt hàng</h4><br>
+		<div class="border border-secondary bg-light">
+			<% @billdts.each do |billdt|%>
+			<div class="row" style="margin-top: 10px">
+				
+				<div class="col-lg-2 col-5">
+					<img src="<%= billdt.imgSP %>" width="100%" style="margin-top: 5px;margin-left: 10px">	
+				</div>
+				<div class="col-lg-5 col-7">
+					<p class="text-danger"><%= billdt.nameSP %></p>
+					<hr class="border border-danger">
+					<h5>Giá bán sản phẩm</h5>
+					<h4><%= number_to_currency(billdt.priceHD,unit: "",delimiter: ".",precision: 0)%>đ</h4>
+				</div>
+				<div class="col-lg-2 col-5">
+					<h5>Số lượng:<%= billdt.quantityHD %></h5> 
+				</div>
+			</div><hr>
+			<% end %>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<div class="col-lg-6 col-12">
+				<div class="card">
+					<div class="card-header">
+						Thông tin đơn hàng
+					</div>
+					<div class="card-body">
+						<p class="card-text">Mã đơn hàng: <%= @bill.id %></p>
+						<p class="card-text">Ngày tạo: <%= @bill.created_at %></p>
+						<p class="card-text">Tình trạng đơn hàng:
+							<% if(@bill.check==0) %> 
+							Chưa xử lý
+							<% else %>
+							Đã xử lý
+							<% end %>
+						</p>
+					</div>
+				</div>
+			</div>
+			<% total=0 %>
+			<div class="col-lg-6 col-12">
+				<div class="card">
+					<div class="card-header">
+						Thông tin thanh toán
+					</div>
+					<div class="card-body">
+						<p class="card-text">
+							<div class="text-secondary float-left">
+								Thành tiền sản phẩm:
+							</div>  
+							<% @billdts.each do |billdt|%>
+							<div class="float-right"><%= number_to_currency(billdt.priceHD*billdt.quantityHD,unit: "",delimiter: ".",precision: 0)%>đ</div><br>
+							<% total+=billdt.priceHD*billdt.quantityHD%>
+							<% end %>
+						</p>
+						<div class="clearfix"></div>
+						<hr>
+						<p class="card-text"><div class="float-left">Tổng tiền:</div>  <font class="text-danger float-right"><%= number_to_currency(total,unit: "",delimiter: ".",precision: 0)%>đ </font></p>
+					</div>
+				</div>
+			</div>
+		</div><br><br>
+		<a href="/bill_history" class="text-danger">Về lịch sử mua hàng</a>
+	</div><br>
+<% end %>

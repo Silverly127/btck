@@ -1,0 +1,37 @@
+<% content_for :content do %>
+<% if(@bills.count==0) %>
+<h4>Không có đơn hàng</h4>
+<% else %>
+<table class="table border border-danger text-danger bg-light">
+	<thead>
+		<tr>
+			<th scope="col">Mã hóa đơn</th>
+			<th scope="col">Ngày tạo tài khoản</th>
+			<th scope="col">Trạng thái</th>
+			<th scope="col">Chi tiết hóa đơn</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @bills.each do |bill| %>
+		<tr>
+			<th scope="row"><%= bill.id %></th>
+			<td><%= bill.created_at %></td>
+			<td>
+				<% if(bill.check==0) %>
+				Chưa xử lý
+				<% else %>
+				Đã xử lý
+				<% end %>
+			</td>
+			<td>
+				<form action="/bill_view">
+					<input type="hidden" name="id" value="<%= bill.id %>">
+					<button class="btn btn-sm btn-success" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;Xem&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				</form>
+			</td>		
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<% end %>
+<% end %>	

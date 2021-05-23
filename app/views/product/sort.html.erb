@@ -1,0 +1,16 @@
+<% content_for :content do %>
+<div class="container">
+	<hr class="border-danger">
+	<h4 class="text-danger">SẢN PHẨM THEO DANH MỤC: <%= @category.nameDM.upcase %></h4><br>
+	<% if(@categoryproducts.count==0) %>
+	<div style="height: 450px">
+		Không có sản phẩm để hiển thị!
+	</div>
+	<% else %>
+	<div class="row ">
+		<% @categoryproducts.each do |product| %>
+		<%= render "elements/product", :product => product  =%>
+		<% end %>
+	<% end %>
+</div>
+<% end %>
